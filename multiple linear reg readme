@@ -1,0 +1,30 @@
+MULTIPLE LINEAR REGRESSION
+q1)What Is Multiple Linear Regression?
+Multiple Linear Regression is just like Simple Linear Regression, but with more than one input (feature).
+Instead of predicting something using one thing, you’re predicting it using many things.
+example:
+Let’s say you want to predict house price.
+In Simple Linear Regression, you'd use only one feature like:
+Number of rooms → House price
+But in Multiple Linear Regression, you'd use many features, like: Number of rooms,House size,Distance to school,Age of house
+
+q2)what is its eqn?
+y = m1 * x1 + m2 * x2 + m3 * x3 + ... + c
+x1,x2,x3 are the input features
+m1,m2,m3 are the coefficients (weights) for each feature
+y is the predicted value (like house price)
+
+q3)how do i visualise it?
+You can’t draw a straight line in multiple dimensions…
+So instead of a line, think of it as a flat surface (a plane) in higher dimensions.
+2 features → prediction is a plane in 3D
+3+ features → you can’t visualize easily, but it’s a hyperplane
+
+q4)what is the exact formula used in linear agreba?
+theta = (Xᵀ X)⁻¹ Xᵀ y
+Where:
+X is the feature matrix (rows = samples, columns = features)
+y is the target/output vector
+theta is the parameter vector (includes slopes and intercept)
+Xᵀ is the transpose of X
+(Xᵀ X)⁻¹ is the inverse of the matrix Xᵀ X
