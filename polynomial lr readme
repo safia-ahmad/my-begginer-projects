@@ -1,0 +1,76 @@
+Q1)what is polynomial regression?
+Simple idea:
+Polynomial Linear Regression lets us model non-linear data using a linear model by adding powers of the input feature.
+It’s still linear in the parameters, but non-linear in the input.
+
+Q2)what is the formula for polynomial lr?
+y = b0 + b1 * x + b2 * x^2
+y  = Predicted output (target value)
+x  = Input feature (independent variable)
+b0 = Intercept (bias term)
+b1 = Coefficient for x (linear term)
+b2 = Coefficient for x^2 (quadratic term)
+
+Q3)Why Is It Called "Polynomial Linear Regression" Even Though It’s Curved?
+Because it is linear in the coefficients — not in the features.
+Look at this Polynomial Regression Equation:
+y = b0 + b1 * x + b2 * x^2 + b3 * x^3
+It has:
+Non-linear features: x^2, x^3, etc.
+But the equation is linear in terms of the parameters: b0, b1, b2, b3
+That means:
+We're still solving using linear algebra methods like in simple/multiple linear regression.
+There's no non-linear optimization involved — just regular least squares.
+
+Q4)what r the main fns?
+ 1. PolynomialFeatures().fit_transform(X)
+📌 Purpose:
+Transforms the input data X by adding polynomial features 
+
+🧠 Formula:
+For a single feature 
+𝑥
+x and degree = 3:
+[1, x, x^2, x^3]
+Example:
+from sklearn.preprocessing import PolynomialFeatures
+poly = PolynomialFeatures(degree=3)
+X_poly = poly.fit_transform([[2]])
+# Output: [[1, 2, 4, 8]] → 1, x, x^2, x^3
+
+ 2. LinearRegression().fit(X_poly, y)
+Purpose:
+Fits a linear model to the polynomial-transformed features.
+Formula (Training step):
+y = b0 + b1 * x + b2 * x^2 + b3 * x^3 + ... + bn * x^n
+The model finds the best coefficients b0, b1, ..., bn by minimizing the error using least squares:
+Minimize:  Σ (y_i - ŷ_i)^2
+Where:
+ŷ_i = prediction for i-th data point
+3. model.predict(X_poly)
+Purpose:
+Uses the learned coefficients to predict output values from new or existing input.
+
+ Formula (Prediction step):
+ŷ = b0 + b1 * x + b2 * x^2 + b3 * x^3 + ... + bn * x^n
+This uses the learned weights from .fit() and applies them to the input features.
+
+Full Example (With All Steps)
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+import numpy as np
+
+# Input data
+x = np.array([1, 2, 3]).reshape(-1, 1)
+y = np.array([2, 5, 10])
+
+# Step 1: Create polynomial features
+poly = PolynomialFeatures(degree=2)
+x_poly = poly.fit_transform(x)  # Output: [1, x, x^2]
+
+# Step 2: Fit model
+model = LinearRegression()
+model.fit(x_poly, y)
+
+# Step 3: Predict
+y_pred = model.predict(x_poly)
